@@ -5,12 +5,13 @@ public class Monster
 	private int mobHealthMax;
 	private String name;
 	private String description;
-	private int strength;
+	private int accuracy;
 	private int magic;
 	private int dodge;
 	private int attack;
 	private int armor;
 	private int attackMin;
+	private int attackSpeed;
 	
 	// strength is used for accuracy, extra damage, 
 	//dodge is used to avoid attacks
@@ -22,29 +23,41 @@ public class Monster
 	public Monster()
 	{
 		this.mobHealthMax = 0;
-		this.name = "";
-		this.description = "";
-		this.strength = 0;
+		this.name = "empty";
+		this.description = "empty";
+		this.accuracy = 0;
 		this.magic = 0;
 		this.dodge = 0;
 		this.attack = 0;
 		this.attackMin = 0;
 		this.armor = 0;
+		this.attackSpeed = 1;
 	}
 
-	public Monster(int mobHealthMax, String name, String description, int strength, int magic, int dodge, int attack, int attackMin, int armor)
+	public Monster(int mobHealthMax, String name, String description, int accuracy, int magic, int dodge, int attack, int attackMin, int armor, int attackSpeed)
 	{
 		this.mobHealthMax = mobHealthMax;
 		this.name = name;
 		this.description = description;
-		this.strength = strength;
+		this.accuracy = accuracy;
 		this.magic = magic;
 		this.dodge = dodge;
 		this.attack = attack;
 		this.attackMin = attackMin;
 		this.armor = armor;
+		this.attackSpeed = attackSpeed;
 		
 	}
+	public int getAttackSpeed() 
+	{
+		return attackSpeed;
+	}
+
+	public void setAttackSpeed(int attackSpeed) 
+	{
+		this.attackSpeed = attackSpeed;
+	}
+
 	public int getMobHealthMax() 
 	{
 		return mobHealthMax;
@@ -60,7 +73,7 @@ public class Monster
 		return name;
 	}
 
-	public void setName(String Name) 
+	public void setName(String name) 
 	{
 		this.name = name;
 	}
@@ -75,14 +88,14 @@ public class Monster
 		this.description = description;
 	}
 
-	public int getStrength() 
+	public int getAccuracy() 
 	{
-		return strength;
+		return accuracy;
 	}
 
-	public void setStrength(int strength) 
+	public void setAccuracy(int accuracy) 
 	{
-		this.strength = strength;
+		this.accuracy = accuracy;
 	}
 
 	public int getMagic() 

@@ -2,6 +2,8 @@ package rpgController;
 
 import rpgModel.Goblin;
 import rpgView.RPGFrame;
+import rpgModel.Monster;
+import rpgView.RPGPanel;
 
 public class RPGAppController 
 {
@@ -31,6 +33,9 @@ public class RPGAppController
 		return baseFrame;
 	}
 	
-	
+	public void attackPlayer()
+	{
+		
+	}
 	
 }

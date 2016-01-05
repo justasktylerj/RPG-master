@@ -86,6 +86,14 @@ public class RPGPanel extends JPanel
 				}
 			}
 		});
+		
+		attackButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				
+			}
+		});
 	}
 }
 
