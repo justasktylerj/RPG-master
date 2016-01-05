@@ -2,28 +2,21 @@ package rpgModel;
 
 public class Goblin 
 {
-	private Monster [] goblins;
 	
-	public Monster[] getGoblins() 
-	{
-		return goblins;
-	}
+	private String namePlayer;
+	private Monster[] goblins;
 
-	public void setGoblins(Monster[] goblins)
-	{
-		this.goblins = goblins;
-	}
-
-	public void goblinList()
+	public void Goblin()
 	{
 
+		this.namePlayer ="";
 		this.goblins = new Monster[5];
-		setupBooks();
+		setupGoblins();
 	}
 	
-	private void setupBooks()
+	private void setupGoblins()
 	{
-		Monster goblin, goblinZombie, Zapper;
+		Monster goblin, goblinZombie, zapper;
 		goblin = new Monster();
 		goblin.setMobHealthMax(10);
 		goblin.setName("Goblin");
@@ -37,17 +30,35 @@ public class Goblin
 		
 		goblinZombie = new Monster(5,"zombie Goblin", "undead goblins, risen from necromancy", 2, 2, 8, 2, 8, 0);
 		
-		Zapper = new Monster(20,"Goblin Zapper", "Smart Goblins that Wield Bombs", 1, 0, 12, 3, 12, 4);
+		zapper = new Monster(20,"Goblin Zapper", "Smart Goblins that Wield Bombs", 1, 0, 12, 3, 12, 4);
 		
 		goblins[0] = goblin;
 		goblins[1] = goblinZombie;
-		goblins[2] = Zapper;
+		goblins[2] = zapper;
 		goblins[3] = goblin;
 		goblins[4] = goblin;
 		goblins[5] = goblin;
-		
-		
+	
 		
 	}
 	
+	public String getNamePlayer() 
+	{
+		return namePlayer;
+	}
+
+	public void setNamePlayer(String namePlayer) 
+	{
+		this.namePlayer = namePlayer;
+	}
+	
+	public Monster[] getGoblins()
+	{
+		return goblins;
+	}
+	
+	public void setGoblins(Monster[] goblins)
+	{
+		this.goblins = goblins;
+	}
 }

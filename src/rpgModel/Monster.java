@@ -29,7 +29,7 @@ public class Monster
 		this.dodge = 0;
 		this.attack = 0;
 		this.attackMin = 0;
-		this.armor = 10;
+		this.armor = 0;
 	}
 
 	public Monster(int mobHealthMax, String name, String description, int strength, int magic, int dodge, int attack, int attackMin, int armor)

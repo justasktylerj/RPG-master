@@ -1,14 +1,11 @@
 package rpgView;
 
 import javax.swing.*;
-
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-
 import rpgModel.Monster;
 import rpgController.RPGAppController;
-import javax.swing.event.ChangeListener;
 
 public class RPGPanel extends JPanel
 {
@@ -17,9 +14,11 @@ public class RPGPanel extends JPanel
 	private RPGAppController baseController;
 	private JButton attackButton;
 	private JLabel health;
-	private JCheckBox mobStats;
-	private JLabel name;
-	private JLabel description;
+	private JButton mobStats;
+	private JLabel nameLabel;
+	private JLabel descriptionLabel;
+	private int startClick;
+	private int maxClicks;
 	
 	public RPGPanel(RPGAppController baseController)
 	{
@@ -27,12 +26,13 @@ public class RPGPanel extends JPanel
 		baseLayout = new SpringLayout();
 		attackButton = new JButton("ATTACK");
 		health = new JLabel("20/20");
-		mobStats = new JCheckBox("Show monster's stats");
-		name = new JLabel("the name");
+		mobStats = new JButton("monster's stats");
+		nameLabel = new JLabel("the name");
+		descriptionLabel = new JLabel("description");
+		maxClicks = baseController.getFirstGoblin().getGoblins().length;
+		startClick = 0;
 		
 		
-		
-		//setupComboBox();
 		setupPanel();
 		setupLayout();
 		setupListeners();
@@ -43,9 +43,12 @@ public class RPGPanel extends JPanel
 		this.setLayout(baseLayout);
 		this.setBackground(Color.ORANGE);
 		this.add(attackButton);
+		this.add(health);
 		this.add(mobStats);
-		this.add(name);
-		this.add(description)
+		this.add(nameLabel);
+		this.add(descriptionLabel);
+	
+		
 	}
 	
 	private void setupLayout()
@@ -54,15 +57,33 @@ public class RPGPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.SOUTH, attackButton, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, mobStats, 0, SpringLayout.NORTH, attackButton);
 		baseLayout.putConstraint(SpringLayout.WEST, mobStats, 2, SpringLayout.EAST, attackButton);
+		baseLayout.putConstraint(SpringLayout.WEST, nameLabel, 0, SpringLayout.WEST, descriptionLabel);
+		baseLayout.putConstraint(SpringLayout.SOUTH, nameLabel, -6, SpringLayout.NORTH, descriptionLabel);
+		baseLayout.putConstraint(SpringLayout.SOUTH, descriptionLabel, -58, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, descriptionLabel, -65, SpringLayout.EAST, this);
 	}
 	
 	private void setupListeners()
 	{
-		ChangeListener mobStats = new ChangeListener()
+		mobStats.addActionListener(new ActionListener()
 		{
-			public void stateChanged(ChangeEvent changeEvent) 
+			public void actionPerformed(ActionEvent click)
 			{
-				
+				Monster [] tempGoblins = baseController.getFirstGoblin().getGoblins();
+				if(startClick < maxClicks)
+				{
+					nameLabel.setText(tempGoblins[startClick].getName());
+					descriptionLabel.setText(tempGoblins[startClick].getDescription());
+					nameLabel.setVisible(true);
+					descriptionLabel.setVisible(true);
+					startClick++;
+				}
+				else
+				{
+					startClick = 0;
+					nameLabel.setText("");
+					descriptionLabel.setText("");
+				}
 			}
 		});
 	}
