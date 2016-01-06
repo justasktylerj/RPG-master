@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import rpgModel.Monster;
+import rpgModel.Goblin;
 import rpgController.RPGAppController;
 
 public class RPGPanel extends JPanel
@@ -14,11 +15,12 @@ public class RPGPanel extends JPanel
 	private RPGAppController baseController;
 	private JButton attackButton;
 	private JLabel health;
-	private JButton mobStats;
+	private JCheckBox mobStats;
 	private JLabel nameLabel;
 	private JLabel descriptionLabel;
-	private int startClick;
-	private int maxClicks;
+	private int goblinNumberPanel;
+	
+	
 	
 	public RPGPanel(RPGAppController baseController)
 	{
@@ -26,11 +28,11 @@ public class RPGPanel extends JPanel
 		baseLayout = new SpringLayout();
 		attackButton = new JButton("ATTACK");
 		health = new JLabel("20/20");
-		mobStats = new JButton("monster's stats");
+		mobStats = new JCheckBox("monster's stats");
 		nameLabel = new JLabel("the name");
 		descriptionLabel = new JLabel("description");
-		maxClicks = baseController.getFirstGoblin().getGoblins().length;
-		startClick = 0;
+		goblinNumberPanel = 0;
+		
 		
 		
 		setupPanel();
@@ -47,6 +49,8 @@ public class RPGPanel extends JPanel
 		this.add(mobStats);
 		this.add(nameLabel);
 		this.add(descriptionLabel);
+		nameLabel.setVisible(false);
+		descriptionLabel.setVisible(false);
 	
 		
 	}
@@ -67,22 +71,21 @@ public class RPGPanel extends JPanel
 	{
 		mobStats.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent click)
+			public void actionPerformed(ActionEvent event)
 			{
 				Monster [] tempGoblins = baseController.getFirstGoblin().getGoblins();
-				if(startClick < maxClicks)
+				goblinNumberPanel = baseController.getGoblinNumber();
+				if(mobStats.isSelected())
 				{
-					nameLabel.setText(tempGoblins[startClick].getName());
-					descriptionLabel.setText(tempGoblins[startClick].getDescription());
 					nameLabel.setVisible(true);
 					descriptionLabel.setVisible(true);
-					startClick++;
+					nameLabel.setText(tempGoblins[goblinNumberPanel].getName());
+					descriptionLabel.setText(tempGoblins[goblinNumberPanel].getDescription());
 				}
 				else
 				{
-					startClick = 0;
-					nameLabel.setText("");
-					descriptionLabel.setText("");
+					nameLabel.setVisible(false);
+					descriptionLabel.setVisible(false);
 				}
 			}
 		});
