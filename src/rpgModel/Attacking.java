@@ -23,6 +23,9 @@ public class Attacking extends RPGAppController
 	private int monsterMinDamage;
 	private int damageTakenPlayer;
 	private int monsterAttacksTotal;
+	private int armorMonster;
+	private int damageTakenMonster;
+	
 	
 	
 	public Attacking(RPGAppController attackController)
@@ -36,7 +39,7 @@ public class Attacking extends RPGAppController
 		monsterAttacksTotal = 1;
 		
 	}
-	public void attackMonster()
+	public void attackPlayer()
 	{
 		Monster [] tempGoblins = attackController.getFirstGoblin().getGoblins();
 		monsterAttacksTotal = tempGoblins[goblinNumber].getAttackSpeed();
@@ -84,5 +87,16 @@ public class Attacking extends RPGAppController
 		{
 			attackController.setPlayerHealthCurrent(attackController.getPlayerHealthCurrent() - damageTakenPlayer);
 		}
+		
 	}
+	 public void attackMonster()
+	 {
+		 
+	 }
+	 
+	 public void damageMonster()
+	 {
+		 
+	 }
+	
 }
