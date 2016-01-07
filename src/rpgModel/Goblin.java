@@ -6,10 +6,10 @@ public class Goblin
 	private String namePlayer;
 	private Monster[] goblins;
 
-	public void Goblin()
+	public Goblin()
 	{
 		this.namePlayer ="";
-		this.goblins = new Monster[5];
+		this.goblins = new Monster[6];
 		setupGoblins();
 	}
 	
@@ -18,6 +18,7 @@ public class Goblin
 		Monster goblin, goblinZombie, zapper;
 		goblin = new Monster();
 		goblin.setMobHealthMax(10);
+		goblin.setMobHealthCurrent(10);
 		goblin.setName("Goblin");
 		goblin.setDescription("weak small green evil humaniods");
 		goblin.setAccuracy(0);
@@ -28,9 +29,9 @@ public class Goblin
 		goblin.setArmor(0);
 		goblin.setAttackSpeed(1);
 		
-		goblinZombie = new Monster(5,"zombie Goblin", "undead goblins, risen from necromancy", 2, 2, 8, 2, 8, 0, 1);
+		goblinZombie = new Monster(5, 5,"zombie Goblin", "undead goblins risen from necromancy", 2, 2, 8, 2, 8, 0, 1);
 		
-		zapper = new Monster(20,"Goblin Zapper", "Smart Goblins that Wield Bombs", 1, 0, 12, 3, 12, 4, 1);
+		zapper = new Monster(20, 20,"Goblin Zapper", "Smart Goblins that Wield Bombs", 1, 0, 12, 3, 12, 4, 1);
 		
 		goblins[0] = goblin;
 		goblins[1] = goblinZombie;

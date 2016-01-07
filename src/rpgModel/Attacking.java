@@ -1,30 +1,31 @@
 package rpgModel;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.SpringLayout;
-
-import rpgModel.Goblin;
 import rpgModel.Monster;
 import rpgController.RPGAppController;
-import rpgView.RPGFrame;
 import rpgView.RPGPanel;
 
 public class Attacking extends RPGAppController
 {
 
 	private RPGAppController attackController;
+	private RPGPanel panelController;
 	private int attackBonus;
+	private int attackingBonus;
 	private int dodgePlayer;
-	private int hitContest;
-	private int armorPlayer;
+	private int monsterDodge;
+	private int hitContestMonster;
+	private int hitContestPlayer;
+	private int playerDamage;
+	private int playerDamageMin;
 	private int monsterDamage;
 	private int monsterMinDamage;
 	private int damageTakenPlayer;
-	private int monsterAttacksTotal;
-	private int armorMonster;
 	private int damageTakenMonster;
+	private int monsterAttacksTotal;
+	private int monsterArmor;
+	private int armorPlayer;
+	
+
 	
 	
 	
@@ -33,12 +34,31 @@ public class Attacking extends RPGAppController
 		this.attackController = attackController;
 		attackBonus = 0;
 		dodgePlayer = 10;
-		hitContest = 0;
+		hitContestMonster = 0;
+		hitContestPlayer = 0;
 		armorPlayer = 0;
 		monsterDamage = 0;
 		monsterAttacksTotal = 1;
+		attackingBonus = 0;
+		monsterDodge = 0;
+		monsterArmor = 0;
+		playerDamage = 0;
+		playerDamageMin = 0;
+		
 		
 	}
+	
+	public Attacking(RPGPanel panelController)
+	{
+		this.panelController = panelController;
+	}
+	
+
+
+	public void setPanelController(RPGPanel panelController) {
+		this.panelController = panelController;
+	}
+
 	public void attackPlayer()
 	{
 		Monster [] tempGoblins = attackController.getFirstGoblin().getGoblins();
@@ -54,8 +74,8 @@ public class Attacking extends RPGAppController
 			goblinNumber = getGoblinNumber();
 			attackBonus = tempGoblins[goblinNumber].getAccuracy();
 			dodgePlayer = attackController.getPlayerDodge();
-			hitContest = attackBonus + (int)(Math.random()*20);
-			if(hitContest >= dodgePlayer)
+			hitContestMonster = attackBonus + (int)(Math.random()*20);
+			if(hitContestMonster >= dodgePlayer)
 			{
 				damagePlayer();
 			}
@@ -85,18 +105,47 @@ public class Attacking extends RPGAppController
 		}
 		else
 		{
-			attackController.setPlayerHealthCurrent(attackController.getPlayerHealthCurrent() - damageTakenPlayer);
+			attackController.liveMonster = tempGoblins[goblinNumber].getMobHealthCurrent() - damageTakenPlayer;
 		}
 		
 	}
 	 public void attackMonster()
 	 {
-		 
+		 if(panelController.isAttacking == true)
+		 {
+			 Monster [] tempGoblins = attackController.getFirstGoblin().getGoblins();
+			 attackingBonus = attackController.getPlayerAccuracy();
+			 monsterDodge = tempGoblins[goblinNumber].getDodge();
+			 hitContestPlayer = attackingBonus + (int)(Math.random()*20);
+				if(hitContestPlayer >= monsterDodge)
+				{
+					damageMonster();
+				}
+			 attackPlayer();
+		 }
+		 panelController.isAttacking = false;
 	 }
 	 
 	 public void damageMonster()
 	 {
-		 
+		 Monster [] tempGoblins = attackController.getFirstGoblin().getGoblins();
+			monsterArmor = tempGoblins[goblinNumber].getArmor();
+			playerDamage = attackController.getPlayerAttack();
+			playerDamageMin = attackController.getPlayerAttackMin();
+			damageTakenMonster = playerDamageMin + (int)(Math.random()*playerDamage) - monsterArmor;
+			if(damageTakenMonster <= 0)
+			{
+				damageTakenMonster = 0;
+			}
+			else
+			{
+				attackController.setPlayerHealthCurrent(attackController.getPlayerHealthCurrent() - damageTakenMonster);
+			}
 	 }
+	 
+	 public RPGPanel getPanelController() 
+	 {
+			return panelController;
+		}
 	
 }

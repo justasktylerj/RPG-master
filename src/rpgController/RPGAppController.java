@@ -4,13 +4,14 @@ import rpgModel.Goblin;
 import rpgView.RPGFrame;
 import rpgModel.Monster;
 import rpgView.RPGPanel;
+import rpgModel.Attacking;
 
-public class RPGAppController 
+public class RPGAppController extends Goblin
 {
 	private Goblin firstGoblin;
 	private RPGFrame baseFrame;
 	protected int goblinNumber;
-	
+	private Goblin Goblin; 
 	private int playerHealthMax;
 	private int playerHealthCurrent;
 	private int playerAccuracy;
@@ -22,12 +23,16 @@ public class RPGAppController
 	private int playerAttackMin;
 	private int playerAttackSpeed;
 	private int playerLevel;
+	public int liveMonster;
 	
 	public void start()
 	{
+		Goblin = new Goblin();
 		String myNamePlayer = baseFrame.getResponse("What is your name");
 		firstGoblin.setNamePlayer(myNamePlayer);
 		baseFrame.setTitle(myNamePlayer + "'s hipster project");
+		
+		
 	} 
 	public RPGAppController()
 	{
@@ -46,6 +51,8 @@ public class RPGAppController
 		this.playerArmor = 0;
 		this.playerAttackSpeed = 1;
 		this.playerLevel = 1;
+		this.liveMonster = 1;
+		
 	}
 	
 	public RPGAppController(int playerHealthMax, int playerAccuracy, int playerStrength, int playerMagic, int playerDodge, int playerAttack, int playerArmor, int playerAttackMin, int playerAttackSpeed, int playerLevel)
@@ -61,8 +68,17 @@ public class RPGAppController
 		this.playerArmor = playerArmor;
 		this.playerAttackSpeed = playerAttackSpeed;
 		this.playerLevel = playerLevel;
+		this.liveMonster = liveMonster;
 	}
 	
+	public int getLiveMonster() 
+	{
+		return liveMonster;
+	}
+	public void setLiveMonster(int liveMonster) 
+	{
+		this.liveMonster = liveMonster;
+	}
 	public int getPlayerHealthCurrent() 
 	{
 		return playerHealthCurrent;

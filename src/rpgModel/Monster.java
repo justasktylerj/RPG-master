@@ -3,6 +3,7 @@ package rpgModel;
 public class Monster 
 {
 	private int mobHealthMax;
+	private int mobHealthCurrent;
 	private String name;
 	private String description;
 	private int accuracy;
@@ -22,21 +23,23 @@ public class Monster
 	
 	public Monster()
 	{
-		this.mobHealthMax = 0;
+		this.mobHealthMax = 1;
+		this.mobHealthCurrent = 1;
 		this.name = "empty";
 		this.description = "empty";
-		this.accuracy = 0;
-		this.magic = 0;
-		this.dodge = 0;
-		this.attack = 0;
-		this.attackMin = 0;
-		this.armor = 0;
+		this.accuracy = 1;
+		this.magic = 1;
+		this.dodge = 1;
+		this.attack = 1;
+		this.attackMin = 1;
+		this.armor = 1;
 		this.attackSpeed = 1;
 	}
 
-	public Monster(int mobHealthMax, String name, String description, int accuracy, int magic, int dodge, int attack, int attackMin, int armor, int attackSpeed)
+	public Monster(int mobHealthMax, int mobHealthCurrent, String name, String description, int accuracy, int magic, int dodge, int attack, int attackMin, int armor, int attackSpeed)
 	{
 		this.mobHealthMax = mobHealthMax;
+		this.mobHealthCurrent = mobHealthCurrent;
 		this.name = name;
 		this.description = description;
 		this.accuracy = accuracy;
@@ -48,6 +51,16 @@ public class Monster
 		this.attackSpeed = attackSpeed;
 		
 	}
+	public int getMobHealthCurrent() 
+	{
+		return mobHealthCurrent;
+	}
+
+	public void setMobHealthCurrent(int mobHealthCurrent) 
+	{
+		this.mobHealthCurrent = mobHealthCurrent;
+	}
+
 	public int getAttackSpeed() 
 	{
 		return attackSpeed;

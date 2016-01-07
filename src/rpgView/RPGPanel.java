@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import rpgModel.Monster;
 import rpgModel.Goblin;
 import rpgController.RPGAppController;
+import rpgModel.Attacking;
 
 public class RPGPanel extends JPanel
 {
@@ -19,19 +20,23 @@ public class RPGPanel extends JPanel
 	private JLabel nameLabel;
 	private JLabel descriptionLabel;
 	private int goblinNumberPanel;
+	public boolean isAttacking;
 	
 	
 	
 	public RPGPanel(RPGAppController baseController)
 	{
+		Monster [] tempGoblins = baseController.getFirstGoblin().getGoblins();
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
 		attackButton = new JButton("ATTACK");
 		health = new JLabel("20/20");
 		mobStats = new JCheckBox("monster's stats");
-		nameLabel = new JLabel("the name");
-		descriptionLabel = new JLabel("description");
-		goblinNumberPanel = 0;
+		nameLabel = new JLabel(tempGoblins[goblinNumberPanel].getName());
+		descriptionLabel = new JLabel(tempGoblins[goblinNumberPanel].getDescription());
+		goblinNumberPanel = 1;
+		isAttacking = false;
+		
 		
 		
 		
@@ -94,7 +99,9 @@ public class RPGPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				isAttacking = true;
+				baseController.getPlayerHealthCurrent();
+				health.setText(baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 			}
 		});
 	}
