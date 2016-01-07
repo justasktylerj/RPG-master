@@ -111,8 +111,6 @@ public class Attacking extends RPGAppController
 	}
 	 public void attackMonster()
 	 {
-		 if(panelController.isAttacking == true)
-		 {
 			 Monster [] tempGoblins = attackController.getFirstGoblin().getGoblins();
 			 attackingBonus = attackController.getPlayerAccuracy();
 			 monsterDodge = tempGoblins[goblinNumber].getDodge();
@@ -122,8 +120,6 @@ public class Attacking extends RPGAppController
 					damageMonster();
 				}
 			 attackPlayer();
-		 }
-		 panelController.isAttacking = false;
 	 }
 	 
 	 public void damageMonster()
