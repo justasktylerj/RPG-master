@@ -1,9 +1,11 @@
 package rpgView;
 
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+
 import rpgModel.Monster;
 import rpgModel.Goblin;
 import rpgController.RPGAppController;
@@ -39,8 +41,14 @@ public class RPGPanel extends JPanel
 		goblinNumberPanel = 1;
 		
 		
+		public RPGPanel(Attacking attackingController)
+		{
+			this.attackingController = attackingController;
+		}
 		
-		
+		public void setAttackingController(Attacking AttackingController) {
+			this.AttackingController = AttackingController;
+		}
 		
 		setupPanel();
 		setupLayout();
@@ -110,7 +118,7 @@ public class RPGPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				attackingController.AttackMonster();
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 			}
