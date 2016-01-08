@@ -23,8 +23,10 @@ public class RPGPanel extends JPanel
 	private JLabel healthMob;
 	private JLabel descriptionLabel;
 	private int goblinNumberPanel;
-	private JLabel narration;
-
+	private JLabel narration1;
+	private JLabel narration2;
+	private JLabel narration3;
+	
 	
 	
 	
@@ -41,7 +43,10 @@ public class RPGPanel extends JPanel
 		descriptionLabel = new JLabel(tempGoblins[goblinNumberPanel].getDescription());
 		healthMob = new JLabel("" + tempGoblins[goblinNumberPanel].getMobHealthCurrent());
 		goblinNumberPanel = 1;
-		narration = new JLabel("");
+		narration1 = new JLabel("");
+		narration2 = new JLabel("");
+		narration3 = new JLabel("");
+		
 		
 		setupPanel();
 		setupLayout();
@@ -57,7 +62,9 @@ public class RPGPanel extends JPanel
 		this.add(mobStats);
 		this.add(nameLabel);
 		this.add(healthMob);
-		this.add(narration);
+		this.add(narration1);
+		this.add(narration2);
+		this.add(narration3);
 		this.add(descriptionLabel);
 		nameLabel.setVisible(false);
 		descriptionLabel.setVisible(false);
@@ -110,7 +117,7 @@ public class RPGPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				Attacking myAttacking = new Attacking();
+				Attacking myAttackMonster = new Attacking();
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 			}

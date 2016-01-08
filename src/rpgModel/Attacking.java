@@ -48,11 +48,6 @@ public class Attacking extends RPGAppController
 		
 	}
 
-	public Attacking() 
-	{
-		
-	}
-
 	public void attackPlayer()
 	{
 		Monster [] tempGoblins = attackController.getFirstGoblin().getGoblins();

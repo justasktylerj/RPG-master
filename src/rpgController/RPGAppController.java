@@ -25,10 +25,13 @@ public class RPGAppController extends Goblin
 	private int playerAttackSpeed;
 	private int playerLevel;
 	public int liveMonster;
+	private String narrationText;
 	
 	public void start()
 	{
 		Goblin = new Goblin();
+		Monster [] tempGoblins = getFirstGoblin().getGoblins();
+		narrationText = "you see a" + tempGoblins[goblinNumber].getName();
 		String myNamePlayer = baseFrame.getResponse("What is your name");
 		firstGoblin.setNamePlayer(myNamePlayer);
 		baseFrame.setTitle(myNamePlayer + "'s hipster project");
@@ -51,8 +54,10 @@ public class RPGAppController extends Goblin
 		this.playerAttackSpeed = 1;
 		this.playerLevel = 1;
 		this.liveMonster = 1;
+		this.narrationText = "";
 		
 	}
+	
 	
 	public RPGAppController(int playerHealthMax, int playerAccuracy, int playerStrength, int playerMagic, int playerDodge, int playerAttack, int playerArmor, int playerAttackMin, int playerAttackSpeed, int playerLevel)
 	{
@@ -68,6 +73,16 @@ public class RPGAppController extends Goblin
 		this.playerAttackSpeed = playerAttackSpeed;
 		this.playerLevel = playerLevel;
 		this.liveMonster = liveMonster;
+	}
+	
+	public String getNarrationText() 
+	{
+		return narrationText;
+	}
+	
+	public void setNarrationText(String narrationText) 
+	{
+		this.narrationText = narrationText;
 	}
 	
 	public int getLiveMonster() 
