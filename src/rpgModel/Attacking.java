@@ -47,17 +47,6 @@ public class Attacking extends RPGAppController
 		
 		
 	}
-	
-	public Attacking(RPGPanel panelController)
-	{
-		this.panelController = panelController;
-	}
-	
-
-
-	public void setPanelController(RPGPanel panelController) {
-		this.panelController = panelController;
-	}
 
 	public void attackPlayer()
 	{
@@ -138,10 +127,5 @@ public class Attacking extends RPGAppController
 				attackController.setPlayerHealthCurrent(attackController.getPlayerHealthCurrent() - damageTakenMonster);
 			}
 	 }
-	 
-	 public RPGPanel getPanelController() 
-	 {
-			return panelController;
-		}
 	
 }

@@ -5,6 +5,7 @@ import rpgView.RPGFrame;
 import rpgModel.Monster;
 import rpgView.RPGPanel;
 import rpgModel.Attacking;
+import rpgView.RPGPanel;
 
 public class RPGAppController extends Goblin
 {
@@ -31,8 +32,6 @@ public class RPGAppController extends Goblin
 		String myNamePlayer = baseFrame.getResponse("What is your name");
 		firstGoblin.setNamePlayer(myNamePlayer);
 		baseFrame.setTitle(myNamePlayer + "'s hipster project");
-		
-		
 	} 
 	public RPGAppController()
 	{
