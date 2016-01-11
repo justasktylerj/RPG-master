@@ -6,12 +6,13 @@ import rpgModel.Monster;
 import rpgView.RPGPanel;
 import rpgModel.Attacking;
 import rpgView.RPGPanel;
+import rpgController.MobTurnSequence;
 
 public class RPGAppController extends Goblin
 {
 	private Goblin firstGoblin;
 	private RPGFrame baseFrame;
-	protected int goblinNumber;
+	protected static int goblinNumber;
 	private Goblin Goblin; 
 	private int playerHealthMax;
 	private int playerHealthCurrent;
@@ -25,7 +26,8 @@ public class RPGAppController extends Goblin
 	private int playerAttackSpeed;
 	private int playerLevel;
 	public int liveMonster;
-	private String narrationText;
+	private static String narrationText;
+	public boolean isPlayersTurn;
 	
 	public void start()
 	{
@@ -35,6 +37,8 @@ public class RPGAppController extends Goblin
 		String myNamePlayer = baseFrame.getResponse("What is your name");
 		firstGoblin.setNamePlayer(myNamePlayer);
 		baseFrame.setTitle(myNamePlayer + "'s hipster project");
+		isPlayersTurn = true;
+		
 	} 
 	public RPGAppController()
 	{
@@ -54,9 +58,19 @@ public class RPGAppController extends Goblin
 		this.playerAttackSpeed = 1;
 		this.playerLevel = 1;
 		this.liveMonster = 1;
-		this.narrationText = "";
+		RPGAppController.narrationText = "";
+		
+		if(isPlayersTurn == false)
+		{
+			MobTurnSequence myMobTurnSequence = new MobTurnSequence();
+		}
+		else
+		{
+			
+		}
 		
 	}
+	
 	
 	
 	public RPGAppController(int playerHealthMax, int playerAccuracy, int playerStrength, int playerMagic, int playerDodge, int playerAttack, int playerArmor, int playerAttackMin, int playerAttackSpeed, int playerLevel)
@@ -75,6 +89,16 @@ public class RPGAppController extends Goblin
 		this.liveMonster = liveMonster;
 	}
 	
+	
+	
+	public boolean isPlayersTurn() 
+	{
+		return isPlayersTurn;
+	}
+	public void setPlayersTurn(boolean isPlayersTurn) 
+	{
+		this.isPlayersTurn = isPlayersTurn;
+	}
 	public String getNarrationText() 
 	{
 		return narrationText;
@@ -101,7 +125,7 @@ public class RPGAppController extends Goblin
 	{
 		this.playerHealthCurrent = playerHealthCurrent;
 	}
-	public int getGoblinNumber() 
+	public static int getGoblinNumber() 
 	{
 		return goblinNumber;
 	}

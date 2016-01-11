@@ -5,17 +5,18 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-
 import rpgModel.Monster;
 import rpgModel.Goblin;
 import rpgController.RPGAppController;
 import rpgModel.Attacking;
+
 
 public class RPGPanel extends JPanel
 {
 
 	private SpringLayout baseLayout;
 	private RPGAppController baseController;
+	private RPGAppController attackController;
 	private JButton attackButton;
 	private JLabel health;
 	private JCheckBox mobStats;
@@ -26,10 +27,6 @@ public class RPGPanel extends JPanel
 	private JLabel narration1;
 	private JLabel narration2;
 	private JLabel narration3;
-	
-	
-	
-	
 	
 	public RPGPanel(RPGAppController baseController)
 	{
@@ -46,12 +43,15 @@ public class RPGPanel extends JPanel
 		narration1 = new JLabel("empty 1");
 		narration2 = new JLabel("empty 2");
 		narration3 = new JLabel("empty 3");
+		attackController = Attacking.attackMonster();
+		
 	
 		setupPanel();
 		setupLayout();
 		setupListeners();
 	}
      
+	
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
@@ -122,10 +122,13 @@ public class RPGPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-//				Attacking myAttackMonster = new Attacking();
+				Attacking myAttacking = new Attacking(attackController);
+				boolean IsPlayersTurn = false;
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 			}
+
+			
 		});
 	}
 }

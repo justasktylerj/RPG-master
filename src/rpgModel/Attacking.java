@@ -8,7 +8,6 @@ public class Attacking extends RPGAppController
 {
 
 	private RPGAppController attackController;
-	private RPGPanel panelController;
 	private int attackBonus;
 	private int attackingBonus;
 	private int dodgePlayer;
@@ -98,7 +97,7 @@ public class Attacking extends RPGAppController
 		}
 		
 	}
-	 public void attackMonster()
+	 public RPGAppController attackMonster()
 	 {
 			 Monster [] tempGoblins = attackController.getFirstGoblin().getGoblins();
 			 attackingBonus = attackController.getPlayerAccuracy();
@@ -109,6 +108,7 @@ public class Attacking extends RPGAppController
 					damageMonster();
 				}
 			 attackPlayer();
+			return attackController;
 	 }
 	 
 	 public void damageMonster()
