@@ -43,11 +43,10 @@ public class RPGPanel extends JPanel
 		descriptionLabel = new JLabel(tempGoblins[goblinNumberPanel].getDescription());
 		healthMob = new JLabel("" + tempGoblins[goblinNumberPanel].getMobHealthCurrent());
 		goblinNumberPanel = 1;
-		narration1 = new JLabel("");
-		narration2 = new JLabel("");
-		narration3 = new JLabel("");
-		
-		
+		narration1 = new JLabel("empty 1");
+		narration2 = new JLabel("empty 2");
+		narration3 = new JLabel("empty 3");
+	
 		setupPanel();
 		setupLayout();
 		setupListeners();
@@ -81,10 +80,16 @@ public class RPGPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.SOUTH, nameLabel, -6, SpringLayout.NORTH, descriptionLabel);
 		baseLayout.putConstraint(SpringLayout.SOUTH, descriptionLabel, -58, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, descriptionLabel, -65, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, health, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, health, 0, SpringLayout.WEST, attackButton);
 		baseLayout.putConstraint(SpringLayout.NORTH, healthMob, 6, SpringLayout.SOUTH, descriptionLabel);
 		baseLayout.putConstraint(SpringLayout.WEST, healthMob, 0, SpringLayout.WEST, nameLabel);
+		baseLayout.putConstraint(SpringLayout.NORTH, health, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, health, 0, SpringLayout.WEST, attackButton);
+		baseLayout.putConstraint(SpringLayout.WEST, narration1, 0, SpringLayout.WEST, attackButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, narration1, -6, SpringLayout.NORTH, attackButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, narration2, -6, SpringLayout.NORTH, narration1);
+		baseLayout.putConstraint(SpringLayout.EAST, narration2, 0, SpringLayout.EAST, narration1);
+		baseLayout.putConstraint(SpringLayout.SOUTH, narration3, -6, SpringLayout.NORTH, narration2);
+		baseLayout.putConstraint(SpringLayout.EAST, narration3, 0, SpringLayout.EAST, narration1);
 	}
 	
 	private void setupListeners()
