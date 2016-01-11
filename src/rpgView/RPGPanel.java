@@ -122,7 +122,7 @@ public class RPGPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				Attacking myAttackMonster = new Attacking();
+//				Attacking myAttackMonster = new Attacking();
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 			}
