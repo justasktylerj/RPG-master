@@ -1,15 +1,13 @@
 package rpgController;
 
-import rpgModel.Attacking;
 import rpgController.RPGAppController;
-import rpgModel.Attacking;
 
-public class MobTurnSequence 
+public class MobTurnSequence extends RPGAppController
 {
 	boolean isPlayersTurn = true;
 	
 	public MobTurnSequence()
 	{
-		
+		attackPlayer();
 	}
 }

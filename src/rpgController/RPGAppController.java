@@ -4,7 +4,7 @@ import rpgModel.Goblin;
 import rpgView.RPGFrame;
 import rpgModel.Monster;
 import rpgView.RPGPanel;
-import rpgModel.Attacking;
+
 import rpgView.RPGPanel;
 import rpgController.MobTurnSequence;
 
@@ -17,6 +17,8 @@ public class RPGAppController extends Goblin
 	private int playerHealthMax;
 	private int playerHealthCurrent;
 	private int playerAccuracy;
+	private int attackBonus;
+	private int attackingBonus;
 	private int playerStrength;
 	private int playerMagic;
 	private int playerDodge;
@@ -25,7 +27,16 @@ public class RPGAppController extends Goblin
 	private int playerAttackMin;
 	private int playerAttackSpeed;
 	private int playerLevel;
+	private int damageTakenPlayer;
+	private int damageTakenMonster;
+	private int monsterAttacksTotal;
+	private int monsterArmor;
+	private int monsterDamage;
+	private int monsterMinDamage;
 	public int liveMonster;
+	private int monsterDodge;
+	private int hitContestMonster;
+	private int hitContestPlayer;
 	private static String narrationText;
 	public boolean isPlayersTurn;
 	
@@ -58,6 +69,14 @@ public class RPGAppController extends Goblin
 		this.playerAttackSpeed = 1;
 		this.playerLevel = 1;
 		this.liveMonster = 1;
+		attackBonus = 0;
+		hitContestMonster = 0;
+		hitContestPlayer = 0;
+		monsterDamage = 0;
+		monsterAttacksTotal = 1;
+		attackingBonus = 0;
+		monsterDodge = 0;
+		monsterArmor = 0;
 		RPGAppController.narrationText = "";
 		
 		if(isPlayersTurn == false)
@@ -90,7 +109,175 @@ public class RPGAppController extends Goblin
 	}
 	
 	
+	public void attackMonster()
+	 {
+			 Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			 attackingBonus = getPlayerAccuracy();
+			 monsterDodge = tempGoblins[goblinNumber].getDodge();
+			 hitContestPlayer = attackingBonus + (int)(Math.random()*20);
+				if(hitContestPlayer >= monsterDodge)
+				{
+					damageMonster();
+				}
+			 attackPlayer();
+			
+	 }
+	 
+	 public void damageMonster()
+	 {
+		 Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			monsterArmor = tempGoblins[goblinNumber].getArmor();
+			playerAttack = getPlayerAttack();
+			playerAttackMin = getPlayerAttackMin();
+			damageTakenMonster = playerAttackMin + (int)(Math.random()*playerAttack) - monsterArmor;
+			if(damageTakenMonster <= 0)
+			{
+				damageTakenMonster = 0;
+			}
+			else
+			{
+				setPlayerHealthCurrent(getPlayerHealthCurrent() - damageTakenMonster);
+			}
+	 }
 	
+	 public void attackPlayer()
+		{
+			Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			monsterAttacksTotal = tempGoblins[goblinNumber].getAttackSpeed();
+			multipleAttacks();
+		}
+		
+		public void multipleAttacks()
+		{
+			Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			if(monsterAttacksTotal >= 1)
+			{
+				goblinNumber = getGoblinNumber();
+				attackBonus = tempGoblins[goblinNumber].getAccuracy();
+				playerDodge = getPlayerDodge();
+				hitContestMonster = attackBonus + (int)(Math.random()*20);
+				if(hitContestMonster >= playerDodge)
+				{
+					damagePlayer();
+				}
+				monsterAttacksTotal--;
+				if(monsterAttacksTotal >= 1)
+				{
+					multipleAttacks();
+				}
+				else
+				{
+					
+				}
+				
+			}
+		}
+		
+		public void damagePlayer()
+		{
+			Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			playerArmor = getPlayerArmor();
+			monsterDamage = tempGoblins[goblinNumber].getAttackMin();
+			monsterMinDamage = tempGoblins[goblinNumber].getAttack();
+			damageTakenPlayer = monsterMinDamage + (int)(Math.random()*monsterDamage) - playerArmor;
+			if(damageTakenPlayer <= 0)
+			{
+				damageTakenPlayer = 0;
+			}
+			else
+			{
+				liveMonster = tempGoblins[goblinNumber].getMobHealthCurrent() - damageTakenPlayer;
+			}
+			
+		}
+	public int getAttackBonus() 
+	{
+		return attackBonus;
+	}
+	public void setAttackBonus(int attackBonus) 
+	{
+		this.attackBonus = attackBonus;
+	}
+	public int getAttackingBonus() 
+	{
+		return attackingBonus;
+	}
+	public void setAttackingBonus(int attackingBonus) 
+	{
+		this.attackingBonus = attackingBonus;
+	}
+	public int getDamageTakenPlayer() 
+	{
+		return damageTakenPlayer;
+	}
+	public void setDamageTakenPlayer(int damageTakenPlayer) 
+	{
+		this.damageTakenPlayer = damageTakenPlayer;
+	}
+	public int getDamageTakenMonster() 
+	{
+		return damageTakenMonster;
+	}
+	public void setDamageTakenMonster(int damageTakenMonster) 
+	{
+		this.damageTakenMonster = damageTakenMonster;
+	}
+	public int getMonsterAttacksTotal() 
+	{
+		return monsterAttacksTotal;
+	}
+	public void setMonsterAttacksTotal(int monsterAttacksTotal) 
+	{
+		this.monsterAttacksTotal = monsterAttacksTotal;
+	}
+	public int getMonsterArmor() 
+	{
+		return monsterArmor;
+	}
+	public void setMonsterArmor(int monsterArmor) 
+	{
+		this.monsterArmor = monsterArmor;
+	}
+	public int getMonsterDamage() 
+	{
+		return monsterDamage;
+	}
+	public void setMonsterDamage(int monsterDamage) 
+	{
+		this.monsterDamage = monsterDamage;
+	}
+	public int getMonsterMinDamage() 
+	{
+		return monsterMinDamage;
+	}
+	public void setMonsterMinDamage(int monsterMinDamage) 
+	{
+		this.monsterMinDamage = monsterMinDamage;
+	}
+	public int getMonsterDodge() 
+	{
+		return monsterDodge;
+	}
+	public void setMonsterDodge(int monsterDodge) 
+	{
+		this.monsterDodge = monsterDodge;
+	}
+	public int getHitContestMonster() 
+	{
+		return hitContestMonster;
+	}
+	public void setHitContestMonster(int hitContestMonster) 
+	{
+		this.hitContestMonster = hitContestMonster;
+	}
+	public int getHitContestPlayer() 
+	{
+		return hitContestPlayer;
+	}
+	public void setHitContestPlayer(int hitContestPlayer) 
+	{
+		this.hitContestPlayer = hitContestPlayer;
+	}
 	public boolean isPlayersTurn() 
 	{
 		return isPlayersTurn;

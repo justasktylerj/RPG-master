@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import rpgModel.Monster;
 import rpgModel.Goblin;
 import rpgController.RPGAppController;
-import rpgModel.Attacking;
+
 
 
 public class RPGPanel extends JPanel
@@ -43,7 +43,6 @@ public class RPGPanel extends JPanel
 		narration1 = new JLabel("empty 1");
 		narration2 = new JLabel("empty 2");
 		narration3 = new JLabel("empty 3");
-		attackController = Attacking.attackMonster();
 		
 	
 		setupPanel();
@@ -122,7 +121,7 @@ public class RPGPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				Attacking myAttacking = new Attacking(attackController);
+				baseController.attackMonster();
 				boolean IsPlayersTurn = false;
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
