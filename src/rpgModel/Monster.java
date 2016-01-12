@@ -51,6 +51,7 @@ public class Monster
 		this.attackSpeed = attackSpeed;
 		
 	}
+	
 	public int getMobHealthCurrent() 
 	{
 		return mobHealthCurrent;

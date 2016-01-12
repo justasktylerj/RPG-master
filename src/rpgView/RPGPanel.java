@@ -1,7 +1,6 @@
 package rpgView;
 
 import javax.swing.*;
-
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -50,7 +49,6 @@ public class RPGPanel extends JPanel
 		setupListeners();
 	}
      
-	
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
