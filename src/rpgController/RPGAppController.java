@@ -36,19 +36,17 @@ public class RPGAppController extends Goblin
 	private int monsterDodge;
 	private int hitContestMonster;
 	private int hitContestPlayer;
-	private static String narrationText;
+	public static String narrationText;
 	public boolean isPlayersTurn;
 	
 	public void start()
 	{
 		Goblin = new Goblin();
 		Monster [] tempGoblins = getFirstGoblin().getGoblins();
-		narrationText = "you see a" + tempGoblins[goblinNumber].getName();
 		String myNamePlayer = baseFrame.getResponse("What is your name");
 		firstGoblin.setNamePlayer(myNamePlayer);
 		baseFrame.setTitle(myNamePlayer + "'s hipster project");
 		isPlayersTurn = true;
-		
 	} 
 	
 	public RPGAppController()
@@ -56,7 +54,7 @@ public class RPGAppController extends Goblin
 		firstGoblin = new Goblin();
 		baseFrame = new RPGFrame(this);
 		goblinNumber = (int)(Math.random()*5);
-		
+		Monster [] tempGoblins = getFirstGoblin().getGoblins();
 		this.playerHealthMax = 20;
 		this.playerHealthCurrent = 20;
 		this.playerAccuracy = 0;
@@ -105,13 +103,13 @@ public class RPGAppController extends Goblin
 				if(hitContestPlayer >= monsterDodge)
 				{
 					damageMonster();
-					narrationText = "You hit" + tempGoblins[goblinNumber].getName();
+					narrationText = "You hit " + tempGoblins[goblinNumber].getName();
 				}
 				else
 				{
-					narrationText = "You miss" + tempGoblins[goblinNumber].getName();
+					narrationText = "You miss " + tempGoblins[goblinNumber].getName();
 				}
-			MobTurnSequence myMobTurnSequence = new MobTurnSequence();	
+			
 	 }
 	 
 	public void damageMonster()

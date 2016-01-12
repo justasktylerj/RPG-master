@@ -1,6 +1,7 @@
 package rpgController;
 
 import rpgController.RPGAppController;
+import rpgView.RPGPanel;
 
 public class RPGRunner 
 {

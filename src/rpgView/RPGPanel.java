@@ -1,11 +1,14 @@
 package rpgView;
 
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+
 import rpgModel.Monster;
 import rpgModel.Goblin;
+import rpgController.MobTurnSequence;
 import rpgController.RPGAppController;
 
 
@@ -23,6 +26,9 @@ public class RPGPanel extends JPanel
 	private JLabel healthMob;
 	private JLabel descriptionLabel;
 	private int goblinNumberPanel;
+	private String narration1Text;
+	private String narration2Text;
+	private String narration3Text;
 	private JLabel narration1;
 	private JLabel narration2;
 	private JLabel narration3;
@@ -38,10 +44,13 @@ public class RPGPanel extends JPanel
 		nameLabel = new JLabel(tempGoblins[goblinNumberPanel].getName());
 		descriptionLabel = new JLabel(tempGoblins[goblinNumberPanel].getDescription());
 		healthMob = new JLabel("" + tempGoblins[goblinNumberPanel].getMobHealthCurrent());
-		goblinNumberPanel = 1;
-		narration1 = new JLabel("empty 1");
-		narration2 = new JLabel("empty 2");
-		narration3 = new JLabel("empty 3");
+		this.goblinNumberPanel = 1;
+		this.narration1Text = new String("you see a " + tempGoblins[goblinNumberPanel].getName());
+		this.narration2Text = new String("The dungeon floor is cold, and musty");
+		this.narration3Text = new String("Welcome to the dungeon");
+		narration1 = new JLabel("you see a " + tempGoblins[goblinNumberPanel].getName());
+		narration2 = new JLabel("The dungeon floor is cold, and musty");
+		narration3 = new JLabel("Welcome to the dungeon");
 		
 	
 		setupPanel();
@@ -120,9 +129,16 @@ public class RPGPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				baseController.attackMonster();
+				String narration3Text = narration2Text;
+				String narration2Text = narration1Text;
+				String narration1Text = baseController.narrationText;
+				narration3.setText(narration3Text);
+				narration2.setText(narration2Text);
+				narration1.setText(narration1Text);
 				boolean IsPlayersTurn = false;
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
+				MobTurnSequence myMobTurnSequence = new MobTurnSequence();
 			}
 
 			
