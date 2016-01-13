@@ -69,29 +69,7 @@ public class RPGAppController extends Mechanics
 		firstGoblin = new Goblin();
 		baseFrame = new RPGFrame(this);
 		Monster [] tempGoblins = getGoblins();
-		this.playerHealthMax = 20;
-		this.playerHealthCurrent = 20;
-		this.playerAccuracy = 0;
-		this.playerStrength = 0;
-		this.playerMagic = 0;
-		this.playerDodge = 10;
-		this.playerAttack = 0;
-		this.playerAttackMin = 1;
-		this.playerArmor = 0;
-		this.playerAttackSpeed = 1;
-		this.playerLevel = 1;
-		this.liveMonster = 1;
-		this.attackBonus = 0;
-		this.hitContestMonster = 0;
-		this.hitContestPlayer = 0;
-		this.monsterDamage = 0;
-		this.monsterAttacksTotal = 1;
-		this.attackingBonus = 0;
-		this.monsterDodge = 0;
-		this.monsterArmor = 0;
-		this.narration1Text = "empty";
-		this.narration2Text = "empty";
-		this.narration3Text = "empty";
+		
 	}
 	
 	public RPGAppController(int playerHealthMax, int playerAccuracy, int playerStrength, int playerMagic, int playerDodge, int playerAttack, int playerArmor, int playerAttackMin, int playerAttackSpeed, int playerLevel)
