@@ -11,8 +11,6 @@ import rpgModel.Goblin;
 import rpgController.MobTurnSequence;
 import rpgController.RPGAppController;
 
-
-
 public class RPGPanel extends JPanel
 {
 
@@ -26,9 +24,6 @@ public class RPGPanel extends JPanel
 	private JLabel healthMob;
 	private JLabel descriptionLabel;
 	private int goblinNumberPanel;
-	private String narration1Text;
-	private String narration2Text;
-	private String narration3Text;
 	private JLabel narration1;
 	private JLabel narration2;
 	private JLabel narration3;
@@ -45,13 +40,10 @@ public class RPGPanel extends JPanel
 		descriptionLabel = new JLabel(tempGoblins[goblinNumberPanel].getDescription());
 		healthMob = new JLabel("" + tempGoblins[goblinNumberPanel].getMobHealthCurrent());
 		this.goblinNumberPanel = 1;
-		this.narration1Text = new String("you see a " + tempGoblins[goblinNumberPanel].getName());
-		this.narration2Text = new String("The dungeon floor is cold, and musty");
-		this.narration3Text = new String("Welcome to the dungeon");
-		narration1 = new JLabel("you see a " + tempGoblins[goblinNumberPanel].getName());
-		narration2 = new JLabel("The dungeon floor is cold, and musty");
-		narration3 = new JLabel("Welcome to the dungeon");
-		changeText();
+		baseController.changeText();
+		this.narration1 = new JLabel("you see a " + tempGoblins[baseController.goblinNumber].getName());
+		this.narration2 = new JLabel("The dungeon floor is cold, and musty");
+		this.narration3 = new JLabel("Welcome to the dungeon");
 		setupPanel();
 		setupLayout();
 		setupListeners();
@@ -77,10 +69,6 @@ public class RPGPanel extends JPanel
 	
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.WEST, narration3, 0, SpringLayout.WEST, attackButton);
-		baseLayout.putConstraint(SpringLayout.SOUTH, narration3, -6, SpringLayout.NORTH, narration2);
-		baseLayout.putConstraint(SpringLayout.WEST, narration2, 0, SpringLayout.WEST, attackButton);
-		baseLayout.putConstraint(SpringLayout.SOUTH, narration2, -6, SpringLayout.NORTH, attackButton);
 		baseLayout.putConstraint(SpringLayout.WEST, attackButton, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, attackButton, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, mobStats, 0, SpringLayout.NORTH, attackButton);
@@ -93,19 +81,18 @@ public class RPGPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, healthMob, 0, SpringLayout.WEST, nameLabel);
 		baseLayout.putConstraint(SpringLayout.NORTH, health, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, health, 0, SpringLayout.WEST, attackButton);
-		baseLayout.putConstraint(SpringLayout.WEST, narration1, 0, SpringLayout.WEST, attackButton);
+		baseLayout.putConstraint(SpringLayout.WEST, narration1, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, narration1, -6, SpringLayout.NORTH, attackButton);
+		baseLayout.putConstraint(SpringLayout.WEST, narration2, 0, SpringLayout.WEST, attackButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, narration2, -6, SpringLayout.NORTH, narration1);
+		baseLayout.putConstraint(SpringLayout.WEST, narration3, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, narration3, -6, SpringLayout.NORTH, narration2);
 	}
-	
-
-	public void changeText()
+	public void changeTextPanel()
 	{
-		String narration3Text = narration2Text;
-		String narration2Text = narration1Text;
-		String narration1Text = baseController.narrationText;
-		narration3.setText(narration3Text);
-		narration2.setText(narration2Text);
-		narration1.setText(narration1Text);
+		narration3.setText(baseController.narration3Text);
+		narration2.setText(baseController.narration2Text);
+		narration1.setText(baseController.narration1Text);
 	}
 	private void setupListeners()
 	{
@@ -138,9 +125,9 @@ public class RPGPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				baseController.attackMonster();
-				
 				boolean IsPlayersTurn = false;
-				changeText();
+				baseController.changeText();
+				changeTextPanel();
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 				MobTurnSequence myMobTurnSequence = new MobTurnSequence();

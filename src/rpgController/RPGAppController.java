@@ -1,5 +1,7 @@
 package rpgController;
 
+import javax.swing.JLabel;
+
 import rpgModel.Goblin;
 import rpgView.RPGFrame;
 import rpgModel.Monster;
@@ -11,7 +13,7 @@ public class RPGAppController extends Goblin
 {
 	private Goblin firstGoblin;
 	private RPGFrame baseFrame;
-	protected static int goblinNumber;
+	public static int goblinNumber;
 	private Goblin Goblin; 
 	private int playerHealthMax;
 	private int playerHealthCurrent;
@@ -39,6 +41,10 @@ public class RPGAppController extends Goblin
 	public int randGoblin;
 	public static String narrationText;
 	public boolean isPlayersTurn;
+	public String narration1Text;
+	public String narration2Text;
+	public String narration3Text;
+	
 	
 	public void start()
 	{
@@ -50,7 +56,9 @@ public class RPGAppController extends Goblin
 		firstGoblin.setNamePlayer(myNamePlayer);
 		baseFrame.setTitle(myNamePlayer + "'s Dungeon");
 		isPlayersTurn = true;
-		
+		this.narration1Text = new String("you see a " + tempGoblins[goblinNumber].getName());
+		this.narration2Text = new String("The dungeon floor is cold, and musty");
+		this.narration3Text = new String("Welcome to the dungeon");
 		
 	} 
 	
@@ -58,7 +66,6 @@ public class RPGAppController extends Goblin
 	{
 		firstGoblin = new Goblin();
 		baseFrame = new RPGFrame(this);
-		
 		Monster [] tempGoblins = getGoblins();
 		this.playerHealthMax = 20;
 		this.playerHealthCurrent = 20;
@@ -80,7 +87,9 @@ public class RPGAppController extends Goblin
 		this.attackingBonus = 0;
 		this.monsterDodge = 0;
 		this.monsterArmor = 0;
-		RPGAppController.narrationText = "";
+		this.narration1Text = "empty";
+		this.narration2Text = "empty";
+		this.narration3Text = "empty";
 	}
 	
 	public RPGAppController(int playerHealthMax, int playerAccuracy, int playerStrength, int playerMagic, int playerDodge, int playerAttack, int playerArmor, int playerAttackMin, int playerAttackSpeed, int playerLevel)
@@ -99,6 +108,13 @@ public class RPGAppController extends Goblin
 		this.liveMonster = liveMonster;
 	}
 	
+	public void changeText()
+	{
+		String narration3Text = narration2Text;
+		String narration2Text = narration1Text;
+		String narration1Text = narrationText;
+	}
+	
 	public void attackMonster()
 	 {
 			 Monster [] tempGoblins = getGoblins();
@@ -114,7 +130,7 @@ public class RPGAppController extends Goblin
 				{
 					narrationText = "You miss " + tempGoblins[goblinNumber].getName();
 				}
-				
+				changeText();
 	 }
 	 
 	public void damageMonster()
@@ -137,14 +153,14 @@ public class RPGAppController extends Goblin
 	public void attackPlayer()
 		{
 			Monster [] tempGoblins = getGoblins();
-			monsterAttacksTotal = tempGoblins[goblinNumber].getAttackSpeed();
 			multipleAttacks();
 		}
 		
 	public void multipleAttacks()
 		{
 			Monster [] tempGoblins = getGoblins();
-			if(monsterAttacksTotal >= 1)
+			
+			for( int monsterAttacksTotal = 0; monsterAttacksTotal >= tempGoblins[goblinNumber].getAttackSpeed(); monsterAttacksTotal++)
 			{
 				goblinNumber = getGoblinNumber();
 				attackBonus = tempGoblins[goblinNumber].getAccuracy();
@@ -159,11 +175,8 @@ public class RPGAppController extends Goblin
 				{
 					narrationText = "you dodge " + tempGoblins[goblinNumber].getName() + "'s attack";
 				}
-				monsterAttacksTotal--;
-				if(monsterAttacksTotal >= 1)
-				{
-					multipleAttacks();
-				}	
+				changeText();
+			
 			}
 		}
 		

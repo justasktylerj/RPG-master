@@ -8,5 +8,6 @@ public class MobTurnSequence extends RPGAppController
 	public MobTurnSequence()
 	{
 		attackPlayer();
+		changeText();
 	}
 }
