@@ -35,7 +35,7 @@ public class RPGPanel extends JPanel
 	
 	public RPGPanel(RPGAppController baseController)
 	{
-		Monster [] tempGoblins = baseController.getFirstGoblin().getGoblins();
+		Monster [] tempGoblins = baseController.getGoblins();
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
 		attackButton = new JButton("ATTACK");
@@ -51,8 +51,7 @@ public class RPGPanel extends JPanel
 		narration1 = new JLabel("you see a " + tempGoblins[goblinNumberPanel].getName());
 		narration2 = new JLabel("The dungeon floor is cold, and musty");
 		narration3 = new JLabel("Welcome to the dungeon");
-		
-	
+		changeText();
 		setupPanel();
 		setupLayout();
 		setupListeners();
@@ -78,6 +77,10 @@ public class RPGPanel extends JPanel
 	
 	private void setupLayout()
 	{
+		baseLayout.putConstraint(SpringLayout.WEST, narration3, 0, SpringLayout.WEST, attackButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, narration3, -6, SpringLayout.NORTH, narration2);
+		baseLayout.putConstraint(SpringLayout.WEST, narration2, 0, SpringLayout.WEST, attackButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, narration2, -6, SpringLayout.NORTH, attackButton);
 		baseLayout.putConstraint(SpringLayout.WEST, attackButton, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, attackButton, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, mobStats, 0, SpringLayout.NORTH, attackButton);
@@ -92,19 +95,25 @@ public class RPGPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, health, 0, SpringLayout.WEST, attackButton);
 		baseLayout.putConstraint(SpringLayout.WEST, narration1, 0, SpringLayout.WEST, attackButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, narration1, -6, SpringLayout.NORTH, attackButton);
-		baseLayout.putConstraint(SpringLayout.SOUTH, narration2, -6, SpringLayout.NORTH, narration1);
-		baseLayout.putConstraint(SpringLayout.EAST, narration2, 0, SpringLayout.EAST, narration1);
-		baseLayout.putConstraint(SpringLayout.SOUTH, narration3, -6, SpringLayout.NORTH, narration2);
-		baseLayout.putConstraint(SpringLayout.EAST, narration3, 0, SpringLayout.EAST, narration1);
 	}
 	
+
+	public void changeText()
+	{
+		String narration3Text = narration2Text;
+		String narration2Text = narration1Text;
+		String narration1Text = baseController.narrationText;
+		narration3.setText(narration3Text);
+		narration2.setText(narration2Text);
+		narration1.setText(narration1Text);
+	}
 	private void setupListeners()
 	{
 		mobStats.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent event)
 			{
-				Monster [] tempGoblins = baseController.getFirstGoblin().getGoblins();
+				Monster [] tempGoblins = baseController.getGoblins();
 				goblinNumberPanel = baseController.getGoblinNumber();
 				if(mobStats.isSelected())
 				{
@@ -129,13 +138,9 @@ public class RPGPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				baseController.attackMonster();
-				String narration3Text = narration2Text;
-				String narration2Text = narration1Text;
-				String narration1Text = baseController.narrationText;
-				narration3.setText(narration3Text);
-				narration2.setText(narration2Text);
-				narration1.setText(narration1Text);
+				
 				boolean IsPlayersTurn = false;
+				changeText();
 				baseController.getPlayerHealthCurrent();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 				MobTurnSequence myMobTurnSequence = new MobTurnSequence();

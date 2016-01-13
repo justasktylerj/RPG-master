@@ -13,6 +13,7 @@ public class Monster
 	private int armor;
 	private int attackMin;
 	private int attackSpeed;
+	public static int finder;
 	
 	// strength is used for accuracy, extra damage, 
 	//dodge is used to avoid attacks
@@ -34,9 +35,10 @@ public class Monster
 		this.attackMin = 1;
 		this.armor = 1;
 		this.attackSpeed = 1;
+		this.finder = 0;
 	}
 
-	public Monster(int mobHealthMax, int mobHealthCurrent, String name, String description, int accuracy, int magic, int dodge, int attack, int attackMin, int armor, int attackSpeed)
+	public Monster(int mobHealthMax, int mobHealthCurrent, String name, String description, int accuracy, int magic, int dodge, int attack, int attackMin, int armor, int attackSpeed, int finder)
 	{
 		this.mobHealthMax = mobHealthMax;
 		this.mobHealthCurrent = mobHealthCurrent;
@@ -49,9 +51,20 @@ public class Monster
 		this.attackMin = attackMin;
 		this.armor = armor;
 		this.attackSpeed = attackSpeed;
+		this.finder = finder;
 		
 	}
 	
+	public static int getFinder() 
+	{
+		return finder;
+	}
+
+	public static void setFinder(int finder) 
+	{
+		finder = finder;
+	}
+
 	public int getMobHealthCurrent() 
 	{
 		return mobHealthCurrent;

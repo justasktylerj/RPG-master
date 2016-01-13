@@ -36,25 +36,30 @@ public class RPGAppController extends Goblin
 	private int monsterDodge;
 	private int hitContestMonster;
 	private int hitContestPlayer;
+	public int randGoblin;
 	public static String narrationText;
 	public boolean isPlayersTurn;
 	
 	public void start()
 	{
 		Goblin = new Goblin();
-		Monster [] tempGoblins = getFirstGoblin().getGoblins();
+		randGoblin = (int)(Math.random()*6);
+		goblinNumber = randGoblin;
+		Monster [] tempGoblins = getGoblins();
 		String myNamePlayer = baseFrame.getResponse("What is your name");
 		firstGoblin.setNamePlayer(myNamePlayer);
-		baseFrame.setTitle(myNamePlayer + "'s hipster project");
+		baseFrame.setTitle(myNamePlayer + "'s Dungeon");
 		isPlayersTurn = true;
+		
+		
 	} 
 	
 	public RPGAppController()
 	{
 		firstGoblin = new Goblin();
 		baseFrame = new RPGFrame(this);
-		goblinNumber = (int)(Math.random()*5);
-		Monster [] tempGoblins = getFirstGoblin().getGoblins();
+		
+		Monster [] tempGoblins = getGoblins();
 		this.playerHealthMax = 20;
 		this.playerHealthCurrent = 20;
 		this.playerAccuracy = 0;
@@ -96,7 +101,7 @@ public class RPGAppController extends Goblin
 	
 	public void attackMonster()
 	 {
-			 Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			 Monster [] tempGoblins = getGoblins();
 			 attackingBonus = getPlayerAccuracy();
 			 monsterDodge = tempGoblins[goblinNumber].getDodge();
 			 hitContestPlayer = attackingBonus + (int)(Math.random()*20);
@@ -109,12 +114,12 @@ public class RPGAppController extends Goblin
 				{
 					narrationText = "You miss " + tempGoblins[goblinNumber].getName();
 				}
-			
+				
 	 }
 	 
 	public void damageMonster()
 	 {
-		 Monster [] tempGoblins = getFirstGoblin().getGoblins();
+		 Monster [] tempGoblins = getGoblins();
 			monsterArmor = tempGoblins[goblinNumber].getArmor();
 			playerAttack = getPlayerAttack();
 			playerAttackMin = getPlayerAttackMin();
@@ -131,14 +136,14 @@ public class RPGAppController extends Goblin
 	
 	public void attackPlayer()
 		{
-			Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			Monster [] tempGoblins = getGoblins();
 			monsterAttacksTotal = tempGoblins[goblinNumber].getAttackSpeed();
 			multipleAttacks();
 		}
 		
 	public void multipleAttacks()
 		{
-			Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			Monster [] tempGoblins = getGoblins();
 			if(monsterAttacksTotal >= 1)
 			{
 				goblinNumber = getGoblinNumber();
@@ -164,7 +169,7 @@ public class RPGAppController extends Goblin
 		
 	public void damagePlayer()
 		{
-			Monster [] tempGoblins = getFirstGoblin().getGoblins();
+			Monster [] tempGoblins = getGoblins();
 			playerArmor = getPlayerArmor();
 			monsterDamage = tempGoblins[goblinNumber].getAttackMin();
 			monsterMinDamage = tempGoblins[goblinNumber].getAttack();

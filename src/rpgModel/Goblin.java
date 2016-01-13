@@ -5,6 +5,7 @@ public class Goblin
 	
 	private String namePlayer;
 	private Monster[] goblins;
+	public static int randGoblin;
 
 	public Goblin()
 	{
@@ -28,10 +29,11 @@ public class Goblin
 		goblin.setAttack(4);
 		goblin.setArmor(0);
 		goblin.setAttackSpeed(1);
+		goblin.setFinder(0);
 		
-		goblinZombie = new Monster(5, 5,"zombie Goblin", "undead goblins risen from necromancy", 2, 2, 8, 2, 8, 0, 1);
+		goblinZombie = new Monster(5, 5,"zombie Goblin", "undead goblins risen from necromancy", 2, 2, 8, 2, 8, 0, 1, 1);
 		
-		zapper = new Monster(20, 20,"Goblin Zapper", "Smart Goblins that Wield Bombs", 1, 0, 12, 3, 12, 4, 1);
+		zapper = new Monster(20, 20,"Goblin Zapper", "Smart Goblins that Wield Bombs", 1, 0, 12, 3, 12, 4, 1, 2);
 		
 		goblins[0] = goblin;
 		goblins[1] = goblinZombie;
