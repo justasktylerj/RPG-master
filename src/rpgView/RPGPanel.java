@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-
+import rpgModel.Mechanics;
 import rpgModel.Monster;
 import rpgModel.Goblin;
 import rpgController.MobTurnSequence;

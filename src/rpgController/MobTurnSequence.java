@@ -1,8 +1,9 @@
 package rpgController;
 
 import rpgController.RPGAppController;
+import rpgModel.Mechanics;
 
-public class MobTurnSequence extends RPGAppController
+public class MobTurnSequence extends Mechanics
 {
 	boolean isPlayersTurn = true;
 	public MobTurnSequence()

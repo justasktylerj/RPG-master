@@ -1,16 +1,16 @@
-package rpgController;
+package rpgModel;
 
+import rpgView.RPGFrame;
 import javax.swing.JLabel;
-
 import rpgModel.Goblin;
 import rpgView.RPGFrame;
 import rpgModel.Monster;
 import rpgView.RPGPanel;
 import rpgView.RPGPanel;
 import rpgController.MobTurnSequence;
-import rpgModel.Mechanics;
+import rpgController.RPGAppController;
 
-public class RPGAppController extends Mechanics
+public class Mechanics extends Goblin
 {
 	private Goblin firstGoblin;
 	private RPGFrame baseFrame;
@@ -49,7 +49,6 @@ public class RPGAppController extends Mechanics
 	
 	public void start()
 	{
-		Mechanics = new Mechanics();
 		Goblin = new Goblin();
 		randGoblin = (int)(Math.random()*6);
 		goblinNumber = randGoblin;
@@ -64,10 +63,10 @@ public class RPGAppController extends Mechanics
 		
 	} 
 	
-	public RPGAppController()
+	public Mechanics()
 	{
 		firstGoblin = new Goblin();
-		baseFrame = new RPGFrame(this);
+		
 		Monster [] tempGoblins = getGoblins();
 		this.playerHealthMax = 20;
 		this.playerHealthCurrent = 20;
@@ -94,7 +93,7 @@ public class RPGAppController extends Mechanics
 		this.narration3Text = "empty";
 	}
 	
-	public RPGAppController(int playerHealthMax, int playerAccuracy, int playerStrength, int playerMagic, int playerDodge, int playerAttack, int playerArmor, int playerAttackMin, int playerAttackSpeed, int playerLevel)
+	public Mechanics(int playerHealthMax, int playerAccuracy, int playerStrength, int playerMagic, int playerDodge, int playerAttack, int playerArmor, int playerAttackMin, int playerAttackSpeed, int playerLevel)
 	{
 		this.playerHealthMax = playerHealthMax;
 		this.playerHealthCurrent = playerHealthMax;
@@ -473,6 +472,4 @@ public class RPGAppController extends Mechanics
 	{
 		this.playerLevel = playerLevel;
 	}
-
-	
 }
