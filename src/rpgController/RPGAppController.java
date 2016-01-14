@@ -15,12 +15,8 @@ public class RPGAppController extends Mechanics
 	private Goblin firstGoblin;
 	private RPGFrame baseFrame;
 	protected Mechanics Mechanics;
-	public static String narrationText;
 	public boolean isPlayersTurn;
-	public String narration1Text;
-	public String narration2Text;
-	public String narration3Text;
-	
+
 	
 	public void start()
 	{
@@ -33,11 +29,7 @@ public class RPGAppController extends Mechanics
 		firstGoblin.setNamePlayer(myNamePlayer);
 		baseFrame.setTitle(myNamePlayer + "'s Dungeon");
 		isPlayersTurn = true;
-		this.narration1Text = new String("you see a " + tempGoblins[goblinNumber].getName());
-		this.narration2Text = new String("The dungeon floor is cold, and musty");
-		this.narration3Text = new String("Welcome to the dungeon");
-		
-	} 
+	}
 	
 	public RPGAppController()
 	{
@@ -47,14 +39,6 @@ public class RPGAppController extends Mechanics
 		
 	}
 	
-	public void changeText()
-	{
-		String narration3Text = narration2Text;
-		String narration2Text = narration1Text;
-		String narration1Text = narrationText;
-	}
-	
-	
 	public boolean isPlayersTurn() 
 	{
 		return isPlayersTurn;
@@ -63,16 +47,6 @@ public class RPGAppController extends Mechanics
 	public void setPlayersTurn(boolean isPlayersTurn) 
 	{
 		this.isPlayersTurn = isPlayersTurn;
-	}
-	
-	public String getNarrationText() 
-	{
-		return narrationText;
-	}
-	
-	public void setNarrationText(String narrationText) 
-	{
-		this.narrationText = narrationText;
 	}
 	
 	public Goblin getFirstGoblin() 

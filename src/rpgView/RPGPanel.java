@@ -5,8 +5,10 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+
 import rpgModel.Mechanics;
 import rpgModel.Monster;
+import rpgModel.HeroStats;
 import rpgModel.Goblin;
 import rpgController.MobTurnSequence;
 import rpgController.RPGAppController;
@@ -40,10 +42,10 @@ public class RPGPanel extends JPanel
 		descriptionLabel = new JLabel(tempGoblins[goblinNumberPanel].getDescription());
 		healthMob = new JLabel("" + tempGoblins[goblinNumberPanel].getMobHealthCurrent());
 		this.goblinNumberPanel = 1;
-		baseController.changeText();
 		this.narration1 = new JLabel("you see a " + tempGoblins[baseController.goblinNumber].getName());
 		this.narration2 = new JLabel("The dungeon floor is cold, and musty");
 		this.narration3 = new JLabel("Welcome to the dungeon");
+		baseController.changeText();
 		setupPanel();
 		setupLayout();
 		setupListeners();
@@ -93,6 +95,7 @@ public class RPGPanel extends JPanel
 		narration3.setText(baseController.narration3Text);
 		narration2.setText(baseController.narration2Text);
 		narration1.setText(baseController.narration1Text);
+		health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 	}
 	private void setupListeners()
 	{
@@ -129,8 +132,9 @@ public class RPGPanel extends JPanel
 				baseController.changeText();
 				changeTextPanel();
 				baseController.getPlayerHealthCurrent();
-				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 				MobTurnSequence myMobTurnSequence = new MobTurnSequence();
+				changeTextPanel();
+				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
 			}
 
 			

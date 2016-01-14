@@ -1,6 +1,6 @@
 package rpgModel;
 
-public class Goblin 
+public class Goblin  
 {
 	
 	private String namePlayer;
