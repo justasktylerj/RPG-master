@@ -15,7 +15,7 @@ public class Mechanics extends Goblin
 	private Goblin firstGoblin;
 	private RPGFrame baseFrame;
 	public static int goblinNumber;
-	private Goblin Goblin; 
+	protected Goblin Goblin; 
 	private int playerHealthMax;
 	private int playerHealthCurrent;
 	private int playerAccuracy;
@@ -45,23 +45,6 @@ public class Mechanics extends Goblin
 	public String narration1Text;
 	public String narration2Text;
 	public String narration3Text;
-	
-	
-	public void start()
-	{
-		Goblin = new Goblin();
-		randGoblin = (int)(Math.random()*6);
-		goblinNumber = randGoblin;
-		Monster [] tempGoblins = getGoblins();
-		String myNamePlayer = baseFrame.getResponse("What is your name");
-		firstGoblin.setNamePlayer(myNamePlayer);
-		baseFrame.setTitle(myNamePlayer + "'s Dungeon");
-		isPlayersTurn = true;
-		this.narration1Text = new String("you see a " + tempGoblins[goblinNumber].getName());
-		this.narration2Text = new String("The dungeon floor is cold, and musty");
-		this.narration3Text = new String("Welcome to the dungeon");
-		
-	} 
 	
 	public Mechanics()
 	{
