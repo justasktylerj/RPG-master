@@ -86,6 +86,13 @@ public class Mechanics extends HeroStats
 			{
 				tempGoblins[goblinNumber].setMobHealthCurrent(tempGoblins[goblinNumber].getMobHealthCurrent() - damageTakenMonster);	
 			}
+			
+			if(tempGoblins[goblinNumber].getMobHealthCurrent() <= 0)
+			{
+				liveMonster = false;
+				tempGoblins[goblinNumber].setMobHealthCurrent(0);
+				narrationText = "you killed the " + tempGoblins[goblinNumber].getName();
+			}
 	 }
 	
 	public void attackPlayer()

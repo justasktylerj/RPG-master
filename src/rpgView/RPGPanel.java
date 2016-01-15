@@ -131,7 +131,6 @@ public class RPGPanel extends JPanel
 				boolean IsPlayersTurn = false;
 				baseController.changeText();
 				changeTextPanel();
-				baseController.getPlayerHealthCurrent();
 				MobTurnSequence myMobTurnSequence = new MobTurnSequence();
 				changeTextPanel();
 				health.setText("Health: " + baseController.getPlayerHealthCurrent() + "/" + baseController.getPlayerHealthMax());
